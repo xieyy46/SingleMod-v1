@@ -89,3 +89,34 @@ done
 ```
 * `eventalign_output_dir`: path to directory containing outputs during nanopolish eventalign process  
 * `sequencing_summary.txt`: this file will be generate in basecalling step
+
+5, extracting and organizing features for m6A prediction (or model traning)
+```
+mkdir features  
+
+#search candidate sites for prediction (all DRACNs in all molecules)  
+cd eventalign_output_dir  
+for file in *eventalign.txt  
+do
+{
+awk 'BEGIN{OFS=FS="\t"}{if($10 ~ /[GTA][AG]AC[ACGT]/){if($3==$10){print $1,".",".","+",$2+3,$2+3,$10}else{print $1,".",".","-",$2+3,$2+3,$10}}}' $file | sort --parallel 20 -T features/ | uniq > features/${file%%_eventalign.txt}_candidate.txt
+} &
+done
+wait
+cat features/*_candidate.txt | sort --parallel 20  -T features  | uniq > features/candidate.txt
+rm features/*_candidate.txt
+
+#generate strand information for each molecule
+bedtools bamtobed  -i sample_name.bam | cut -f 4,6 > features/strand.txt
+
+#generate prefix of files name for all split bam files
+ls split_bam_dir/*bam | awk 'BEGIN{OFS=FS="\t"}{split($1,info,"/");print info[length(info)]}' | sed 's/.bam//g' > features/prefix.txt
+
+#extracting features
+python -u SingleMod/extract_feature_onestep.py -s features/strand.txt -c features/candidate.txt -e eventalign_output_dir -q sam2tsv_output_dir -p features/prefix.txt -o features -n 13 
+ls path_to_features/features/*current_qual.txt > features/features.txt
+
+#organizing features
+python -u SingleMod/organize_feature.py -c features/features.txt -o features -n 25 -m DRACN
+```
+* `features`: path to directory containing candidate.txt, strand.txt, prefix.txt, features.txt, and train.npy (train.npy is the input of SingleMod)
