@@ -137,11 +137,37 @@ done
 cat prediction/*_prediction.txt > prediction.txt
 
 ```
-* `prediction`: path to directory containing m6A prediction results
-* `models`: path to directory containing SingleMod models
-* `-g`: cuda index, default is 0; if do not have/use GPU, ignore this setting
+* `prediction`: directory containing m6A prediction results
+* `models`: directory containing SingleMod models
+* `-g`: cuda index, default is using CPU; if you use GPU, please specify the cuda index
 * `-b`: batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size
 * `prediction.txt`: final result as follow
 (site  probability)  
 chromosome_14|3864706|+|90e1832b-38e5-40c3-944d-b7cfd1407ad6|AAACA  0.9866609573364258
 chromosome_5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
+
+7, visualization of single-molecule m6A in IGV (optional)
+```
+mkdir marked
+
+#marking m6A modification information into bam file
+cd split_bam_dir
+for file in *bam
+do
+{
+python -u SingleMod/bam_mark_m6A.py  prediction.txt $file marked/$file
+} &
+done
+wait
+
+#merge and index
+cd marked
+for file in *bam; do samtools index $file;done
+samtools merge -@ 20 merge.bam *bam
+samtools index merge.bam
+rm shard*
+```
+* `marked`: path to directory containing m6A-marked bam file
+
+# Citing SingleMod
+# Data availability
