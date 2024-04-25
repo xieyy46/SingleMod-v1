@@ -1,5 +1,5 @@
 # SingleMod
-by Ying-Yuan Xie, Zhen-Dong Zhong, Hong-Xuan Chen
+by Ying-Yuan Xie, Zhen-Dong Zhong, Hong-Xuan Chen 
 Correspondence to: zhangzhang@mail.sysu.edu.cn and luogzh5@mail.sysu.edu.cn
 
 ![schematic illustration of SingleMod](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/schematic%20illustration.png)
@@ -13,7 +13,7 @@ Data preparing:
 | methylation_rate.bed | methylation-rate labels, **needed only for training your own models** |
 
 Environment:   
-Our pipeline is executed on the Linux system.      
+Our pipeline is executed on the Linux system.    
 Python3.6+ is required. 
 
 Softwares:
