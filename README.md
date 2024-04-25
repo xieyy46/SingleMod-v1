@@ -68,6 +68,7 @@ done
 ```
 * `split_bam_dir`: path to directory containing split bam files  
 * `--SPLIT_TO_N_FILES 25`: how many files sample_name.bam should be split into for following parallel processing. This value can be adjust.
+* The default prefix for split bam files is shard_
 
 3, nanopolish eventalign  
 ```
