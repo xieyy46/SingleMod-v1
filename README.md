@@ -122,3 +122,26 @@ python -u SingleMod/split_into_motif.py -d tmp_features -o features
 ```
 * `tmp_features`: path to directory containing intermediate file 
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy) 
+
+5, m6A prediction
+```
+mkdir prediction
+
+#predicting
+for motif in # we now support 43 motifs
+do
+python -u SingleMod/SingleMod_m6A_prediction.py -d features -k $motif -m models/model_${motif}.pth.tar -g 0 -b 30000 -o prediction/${motif}_prediction.txt
+done
+
+#organizing the results
+cat prediction/*_prediction.txt > prediction.txt
+
+```
+* `prediction`: path to directory containing m6A prediction results
+* `models`: path to directory containing SingleMod models
+* `-g`: cuda index, default is 0; if do not have/use GPU, ignore this setting
+* `-b`: batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size
+* `prediction.txt`: final result as follow
+(site  probability)  
+chromosome_14|3864706|+|90e1832b-38e5-40c3-944d-b7cfd1407ad6|AAACA  0.9866609573364258
+chromosome_5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
