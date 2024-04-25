@@ -97,6 +97,7 @@ mkdir tmp_features
 mkdir features
 
 cd split_bam_dir
+#convert bam to bed to extra strand information
 for file in shard*bam
 do
 {
@@ -114,9 +115,9 @@ python -u SingleMod/organize_from_eventalign.py -b split_bam_dir/${i}.bed -e eve
 } &
 done
 wait
-
 cd tmp_features
 wc -l *_extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
+
 python -u SingleMod/split_into_motif.py -d tmp_features -o features
 ```
 * `tmp_features`: path to directory containing intermediate file 
