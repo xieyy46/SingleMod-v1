@@ -90,33 +90,33 @@ done
 * `eventalign_output_dir`: path to directory containing outputs during nanopolish eventalign process  
 * `sequencing_summary.txt`: this file will be generate in basecalling step
 
-5, extracting and organizing features for m6A prediction (or model traning)
+4, extracting and organizing features for m6A prediction (or model traning)
 ```
-mkdir features  
+mkdir tmp_features  
+mkdir features
 
-#search candidate sites for prediction (all DRACNs in all molecules)  
-cd eventalign_output_dir  
-for file in *eventalign.txt  
+cd split_bam_dir
+for file in shard*bam
 do
 {
-awk 'BEGIN{OFS=FS="\t"}{if($10 ~ /[GTA][AG]AC[ACGT]/){if($3==$10){print $1,".",".","+",$2+3,$2+3,$10}else{print $1,".",".","-",$2+3,$2+3,$10}}}' $file | sort --parallel 20 -T features/ | uniq > features/${file%%_eventalign.txt}_candidate.txt
+bedtools bamtobed -i $file > ${file/.bam/.bed}
 } &
 done
 wait
-cat features/*_candidate.txt | sort --parallel 20  -T features  | uniq > features/candidate.txt
-rm features/*_candidate.txt
 
-#generate strand information for each molecule
-bedtools bamtobed  -i sample_name.bam | cut -f 4,6 > features/strand.txt
+#running parallelly
+batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0007 shard_0008 shard_0009 shard_0010 shard_0011 shard_0012 shard_0013 shard_0014 shard_0015 shard_0016 shard_0017 shard_0018 shard_0019 shard_0020 shard_0021 shard_0022 shard_0023 shard_0024 shard_0025)
+for i in ${batch[@]}
+do
+{
+python -u SingleMod/organize_from_eventalign.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_evenalign.txt -o tmp_features -p $i
+} &
+done
+wait
 
-#generate prefix of files name for all split bam files
-ls split_bam_dir/*bam | awk 'BEGIN{OFS=FS="\t"}{split($1,info,"/");print info[length(info)]}' | sed 's/.bam//g' > features/prefix.txt
-
-#extracting features
-python -u SingleMod/extract_feature_onestep.py -s features/strand.txt -c features/candidate.txt -e eventalign_output_dir -q sam2tsv_output_dir -p features/prefix.txt -o features -n 13 
-ls path_to_features/features/*current_qual.txt > features/features.txt
-
-#organizing features
-python -u SingleMod/organize_feature.py -c features/features.txt -o features -n 25 -m DRACN
+cd tmp_features
+wc -l *_extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
+python -u SingleMod/split_into_motif.py -d tmp_features -o features
 ```
-* `features`: path to directory containing candidate.txt, strand.txt, prefix.txt, features.txt, and train.npy (train.npy is the input of SingleMod)
+* `tmp_features`: path to directory containing intermediate file 
+* `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy) 
