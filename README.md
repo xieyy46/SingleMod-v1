@@ -37,3 +37,34 @@ SingleMod code:
 | SingleMod_train.py | training your own models | **needed only for training your own models** |
 
 SingleMod models: https://github.com/xieyy46/SingleMod/tree/main/models
+
+# Running SingleMod  
+#Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile   
+#Welcome to use our test data for end-to-end practice; our test data provides the expected results for each step: https://github.com/xieyy46/SingleMod/tree/main/test
+
+1, basecalling # ignore, if your fast5 has been basecalled  
+`guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'`  
+* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5) 
+* `basecall_output_dir`: path to directory containing outputs during basecalling process
+
+2, mapping and spliting bam file
+```
+mkdir split_bam_dir
+
+#mapping
+cat basecall_output_dir/pass/*fastq > basecall_output_dir/merge.fastq # ignore, if you have merge your fastq files  
+minimap2 -ax map-ont -k 14 reference.fa -t 25 --secondary=no basecall_output_dir/merge.fastq -o sample_name.sam # ignore, if you have mapped your reads
+samtools view -@ 30 -F 2048 -F 4 -b sample_name.sam | samtools sort -O BAM -@ 20  -o sample_name.bam
+samtools index -@ 16 sample_name.bam
+
+#spliting bam files for parallel processing
+java -jar picard.jar SplitSamByNumberOfReads --INPUT sample_name.bam --SPLIT_TO_N_FILES 25 --OUTPUT split_bam_dir
+for bam in split_bam_dir/*bam
+do
+{
+samtools index $bam
+} &
+done
+```
+* `split_bam_dir`: path to directory containing split bam files  
+* `--SPLIT_TO_N_FILES 25`: how many files sample_name.bam should be split into for following parallel processing. This value can be adjust.
