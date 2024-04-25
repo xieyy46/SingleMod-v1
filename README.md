@@ -30,10 +30,10 @@ python modules:
 SingleMod code:
 | Code | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
-| extract_feature_onestep.py  | generate features for each DRACN motif in each molecule | |
-| organize_feature.py   | organize features into input format of SingleMod  | |
-| mir_predict.py    | predict the probability of m6A modification for each DRACN motif in each molecule | |
-| bam_mark_m6A.py   | mark m6A modifications in bam file for visualization of single-molecule m6A| |
-| mir_train.py      | training your own models | **needed only for training your own models** |
+| organize_from_eventalign.py  | extra and organize raw signals from nanopolish eventalign result | |
+| split_into_motif.py  | extra and organize raw signals into different motifs | |
+| SingleMod_m6A_prediction.py  | predict m6A modification within each molecule | |
+| bam_mark_m6A.py  | mark m6A modifications into bam file for visualization of single-molecule m6A | |
+| SingleMod_train.py | training your own models | **needed only for training your own models** |
 
 SingleMod models: https://github.com/xieyy46/SingleMod/tree/main/models
