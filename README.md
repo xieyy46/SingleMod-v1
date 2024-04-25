@@ -68,3 +68,24 @@ done
 ```
 * `split_bam_dir`: path to directory containing split bam files  
 * `--SPLIT_TO_N_FILES 25`: how many files sample_name.bam should be split into for following parallel processing. This value can be adjust.
+
+3, nanopolish eventalign  
+```
+mkdir eventalign_output_dir
+
+#making index
+nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt
+# or if you donot have sequencing_summary.txt, but much slower: nanopolish index --directory=fast5_dir basecall_output_dir/merge.fastq
+
+#parallelly nanopolish eventalign 
+for file in split_bam_dir/*.bam
+do
+{
+info=(${file//// })
+nanopolish eventalign --reads basecall_output_dir/merge.fastq --bam $file --genome reference.fa -t 15 --scale-events --samples --signal-index --summary eventalign_output_dir/${info[-1]%%.bam}_summary.txt --print-read-names > eventalign_output_dir/${info[-1]%%.bam}_eventalign.txt
+} &
+done
+#if run out of memory, please run in batches
+```
+* `eventalign_output_dir`: path to directory containing outputs during nanopolish eventalign process  
+* `sequencing_summary.txt`: this file will be generate in basecalling step
