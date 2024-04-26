@@ -171,7 +171,12 @@ samtools merge -@ 20 merge.bam *bam
 samtools index merge.bam
 rm shard*
 ```
-* `marked`: path to directory containing m6A-marked bam file
+* `marked`: path to directory containing m6A-marked bam file  
+Load the m6A-marked bam file into IGV. A representative gene snapshot is shown below (the gray and black vertical bars indicate A and m6A, respectively):  
+#To achieve a clearer visualization, it is necessary to modify some settings in IGV. Please following: https://github.com/xieyy46/SingleMod/blob/main/test/marked/README.md
+
+![MCL1 single-molecule m6A](https://github.com/xieyy46/SingleMod/blob/main/Figures/MCL1_single-molecule_m6A.png)
+
 
 # Citing SingleMod
 # Data availability
