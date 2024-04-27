@@ -20,7 +20,7 @@ Softwares:
 | Tool | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
 | Guppy  | generate fastq from fast5 through basecalling  | ignored, if your fast5 has been basecalled |
-| minimap2 | align reads to reference.fa  | we recommend mapping your reads to genome.fa |
+| minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
 | Picard | split bam file to multiples one | allowing for parallel processing, significantly saving time |
 | nanopolish | eventalign, assign current signals to bases | |
 
