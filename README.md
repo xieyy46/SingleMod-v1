@@ -145,8 +145,8 @@ cat prediction/*_prediction.txt > prediction.txt
 * `models`: directory containing SingleMod models
 * `-g`: cuda index, default is using CPU; if you use GPU, please specify the cuda index
 * `-b`: batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size
-* `prediction.txt`: final result as follow
-(site  probability)  
+* `prediction.txt` is the final result containing single-molecule m6A prediction, its format is as follow:  
+(chromosome|location|strand|read_name|motif  probability)  
 chromosome_14|3864706|+|90e1832b-38e5-40c3-944d-b7cfd1407ad6|AAACA  0.9866609573364258
 chromosome_5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
 
