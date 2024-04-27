@@ -140,6 +140,9 @@ done
 #organizing the results
 cat prediction/*_prediction.txt > prediction.txt
 
+#calculate methylation rate for each sites from single-molecule m6A prediction
+awk 'BEGIN{OFS=FS="\t"}{split($1,info,"|");s=info[1]"|"info[2]"|"info[3]"|"info[5];t[s]=t[s]+1;if($2 > 0.5){m[s]=m[s]+1}}END{for(i in t){split(i,info,"|");if(i in m){print info[1],info[2]-1,info[2],i,m[i]/t[i],info[3],t[i],m[i],info[4]}else{print info[1],info[2]-1,info[2],i,0,info[3],t[i],0,info[4]}}}' prediction.txt | sort -k1,1 -k2,2n > mr.bed  
+
 ```
 * `prediction`: directory containing m6A prediction results
 * `models`: directory containing SingleMod models
@@ -149,6 +152,11 @@ cat prediction/*_prediction.txt > prediction.txt
 (chromosome|location|strand|read_name|motif  probability)  
 chromosome_14|3864706|+|90e1832b-38e5-40c3-944d-b7cfd1407ad6|AAACA  0.9866609573364258
 chromosome_5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
+* `mr.bed` contains methylation rate results for each sites calculated from single-molecule m6A prediction, its format is as follow:
+(chromosome location-1  location  ID  methylation_rate  strand  total_molecule_number  modified_molecule_number  motif)  
+chr1  16677290  16677291  chr1|16677291|+|AAACA  0.156863  +  51   8  AAACA
+chr1  16677516  16677517  chr1|16677517|+|AAACA  0.037736  +  53   2  AAACA
+
 
 7, visualization of single-molecule m6A in IGV (optional)
 ```
