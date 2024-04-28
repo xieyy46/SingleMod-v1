@@ -39,7 +39,7 @@ SingleMod code:
 | bam_mark_m6A.py  | mark m6A modifications into bam file for visualization of single-molecule m6A | |
 | SingleMod_train.py | training your own models | **needed only for training your own models** |
 
-SingleMod models: https://github.com/xieyy46/SingleMod/tree/main/models
+SingleMod models: [https://github.com/xieyy46/SingleMod/tree/main/models](https://github.com/xieyy46/SingleMod-v1/tree/main/models)  
 
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile   
