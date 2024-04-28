@@ -43,7 +43,7 @@ SingleMod models: https://github.com/xieyy46/SingleMod-v1/tree/main/models
 
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile   
-#Welcome to use our test data for end-to-end practice; we provides the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
+#Welcome to use our test data for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 `guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'`  
