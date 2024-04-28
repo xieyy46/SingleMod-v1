@@ -1,4 +1,4 @@
-#Note  
-We recommend use mammal models for mammal species and non-mammal models for non-mammal species. Most of mammal models and non-mammal models are the same one.
-All non-mammal models were trained using combined data from HEK293T, HeLa, Arab, rice, Chlamydomonas.
-
+# Note  
+We recommend use mammal models for mammal species and non-mammal models for non-mammal species.
+All non-mammal models and most of mammal models were the same and trained using combined data from HEK293T, HeLa, Arab, rice, Chlamydomonas.
+9 mammal models (AAACT, AGACA, AGACC, AGACT, GAACA, GAACC, GGACC, TGACA, TGACT) were trained using combined data from HEK293T, HeLa.
