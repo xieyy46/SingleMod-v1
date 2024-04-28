@@ -1,2 +1,2 @@
 # Note
-This step should output shard_00xx_extra.npy, shard_00xx_sequence.npy, and shard_00xx_signal.npy, but they are too heavy to be uploaded to GitHub.
+This step should output shard_xxxx_extra.npy, shard_xxxx_sequence.npy, and shard_xxxx_signal.npy, but they are too heavy to be uploaded to GitHub.
