@@ -42,13 +42,13 @@ SingleMod code:
 SingleMod models: https://github.com/xieyy46/SingleMod-v1/tree/main/models   
 
 # Running SingleMod  
-#Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile   
+#Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
 #Welcome to use our test data for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 `guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'`  
-* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5) 
-* `basecall_output_dir`: path to directory containing outputs during basecalling process
+* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).  
+* `basecall_output_dir`: path to directory containing outputs during basecalling process.  
 
 2, mapping and spliting bam file
 ```
@@ -69,9 +69,9 @@ samtools index $bam
 } &
 done
 ```
-* `split_bam_dir`: path to directory containing split bam files  
+* `split_bam_dir`: path to directory containing split bam files.  
 * `--SPLIT_TO_N_FILES 25`: how many files sample_name.bam should be split into for following parallel processing. This value can be adjust.
-* The default prefix for split bam files is shard_
+* The default prefix for split bam files is shard_xxxx.  
 
 3, nanopolish eventalign  
 ```
@@ -91,8 +91,8 @@ nanopolish eventalign --reads basecall_output_dir/merge.fastq --bam $file --geno
 done
 #if run out of memory, please run in batches
 ```
-* `eventalign_output_dir`: path to directory containing outputs during nanopolish eventalign process  
-* `sequencing_summary.txt`: this file will be generate in basecalling step
+* `eventalign_output_dir`: path to directory containing outputs during nanopolish eventalign process.   
+* `sequencing_summary.txt`: this file will be generate in basecalling step.  
 
 4, extracting and organizing features for m6A prediction (or model traning)
 ```
@@ -123,8 +123,8 @@ wc -l *_extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.
 
 python -u SingleMod/split_into_motif.py -d tmp_features -o features
 ```
-* `tmp_features`: path to directory containing intermediate file 
-* `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy) 
+* `tmp_features`: path to directory containing intermediate file.  
+* `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
 
 5, m6A prediction
 ```
@@ -144,10 +144,10 @@ cat prediction/*_prediction.txt > prediction.txt
 awk 'BEGIN{OFS=FS="\t"}{split($1,info,"|");s=info[1]"|"info[2]"|"info[3]"|"info[5];t[s]=t[s]+1;if($2 > 0.5){m[s]=m[s]+1}}END{for(i in t){split(i,info,"|");if(i in m){print info[1],info[2]-1,info[2],i,m[i]/t[i],info[3],t[i],m[i],info[4]}else{print info[1],info[2]-1,info[2],i,0,info[3],t[i],0,info[4]}}}' prediction.txt | sort -k1,1 -k2,2n > mr.bed  
 
 ```
-* `prediction`: directory containing m6A prediction results
-* `models`: directory containing SingleMod models
-* `-g`: cuda index, default is using CPU; if you use GPU, please specify the cuda index
-* `-b`: batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size
+* `prediction`: directory containing m6A prediction results.  
+* `models`: directory containing SingleMod models.  
+* `-g`: cuda index, default is using CPU; if you use GPU, please specify the cuda index.  
+* `-b`: batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size.  
 * `prediction.txt` is the final result containing single-molecule m6A prediction, its format is as follow:  
 (chromosome|location|strand|read_name|motif  probability)  
 chr14|3864706|+|90e1832b-38e5-40c3-944d-b7cfd1407ad6|AAACA  0.9866609573364258
