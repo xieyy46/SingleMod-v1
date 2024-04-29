@@ -131,8 +131,9 @@ python -u SingleMod/split_into_motif.py -d tmp_features -o features
 mkdir prediction
 
 #predicting
-# we now support m6A prediction within 43 motifs
-for motif in AAACA AAACC AAACG AAACT AAATA AAATT AGACA AGACC AGACG AGACT AGATT ATACA ATACT CAACA CAACT CGACT CTACT GAACA GAACC GAACG GAACT GAATA GAATC GAATG GAATT GGACA GGACC GGACG GGACT GGATA GGATC GGATG GGATT GTACA GTACT TAACA TAACT TGACA TGACC TGACG TGACT TTACA TTACT
+# we now support m6A prediction within 39 motifs
+for motif in AAACA AAACC AAACG AAACT AAATA AAATT AGACA AGACC AGACG AGACT AGATT ATACT CAACT CGACT CTACT GAACA GAACC GAACG GAACT GAATA GAATC GAATG GAATT GGACA GGACC GGACG GGACT GGATA GGATC GGATG GGATT GTACT TAACT 
+ TGACA TGACC TGACG TGACT TTACA TTACT
 do
 python -u SingleMod/SingleMod_m6A_prediction.py -d features -k $motif -m models/model_${motif}.pth.tar -g 0 -b 30000 -o prediction/${motif}_prediction.txt
 done
