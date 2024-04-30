@@ -154,7 +154,7 @@ def main():
 	parser.add_argument('-e','--eventalign',required = True, help="the path to eventalign.txt")
 	parser.add_argument('-o','--out_dir',required = True, help="the directory saving output results")
 	parser.add_argument('-p','--prefix',required = True, help="the prefix of output results")
-	parser.add_argument('-s','--size',type=int,default=15000000,required = False, help="the first dimension of memmap files; default setting is 15000000, which is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 30000000, 10-15G: 45000000")
+	parser.add_argument('-s','--size',type=int,default=18000000,required = False, help="the first dimension of memmap files; default setting is 18000000, which is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 36000000, 10-15G: 54000000")
 	args = parser.parse_args(sys.argv[1:])
 
 	if not (os.path.exists(args.bed) and os.path.exists(args.eventalign)):
