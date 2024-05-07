@@ -168,7 +168,7 @@ cd split_bam_dir
 for file in *bam
 do
 {
-python -u SingleMod/bam_mark_m6A.py  prediction.txt $file marked/$file
+python -u SingleMod/bam_mark_m6A.py  -p prediction.txt -b $file -o marked/$file
 } &
 done
 wait
