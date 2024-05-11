@@ -65,7 +65,7 @@ def main():
 	parser = argparse.ArgumentParser(description='extra and organize raw signals into different motifs')
 	parser.add_argument('-d','--data_dir',required = True, help="the directory containing npy files and extra_info.txt (the output directory of organize_from_eventalign.py)")
 	parser.add_argument('-o','--out_dir',required = True, help="the directory saving output results")
-	parser.add_argument('-s','--size',type=int,default=15000000,required = False, help="the first dimension of npy files (the size setting when runing organize_from_eventalign.py). If error occur, do not use default setting")
+	parser.add_argument('-s','--size',type=int,default=18000000,required = False, help="the first dimension of npy files (the size setting when runing organize_from_eventalign.py). If error occur, do not use default setting")
 	parser.add_argument('-p','--process',type=int,default=20,required = False, help="the number of process; default setting is 20")
 	args = parser.parse_args(sys.argv[1:])
 
