@@ -181,7 +181,7 @@ def main():
 	parser.add_argument('-k','--motif',required = True, help="specified motif")
 	parser.add_argument('-m','--model',required = True, help="the SingleMod model")
 	parser.add_argument('-g','--gpu',type=int,default=-1,required = False, help="cuda index, default is using CPU; if you use GPU, please specify the cuda index")
-	parser.add_argument('-b','--batch_size',type=int,default=30000,required = False, help="batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size")
+	parser.add_argument('-b','--batch_size',type=int,default=30000,required = False, help="batch size for m6A prediction, default is 30000; if you use CPU to make prediction, you can use a larger batch size (e.g. 200000) to save time")
 	parser.add_argument('-o','--out_file',required = True, help="the file to output prediction result")
 	args = parser.parse_args(sys.argv[1:])
 
