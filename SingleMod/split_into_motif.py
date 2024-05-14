@@ -15,7 +15,7 @@ import argparse
 import functools
 
 def load_data(args_list):
-	motif, data_dir, out_dir, chunks, idxs, size = args_list
+	motif, data_dir, out_dir, size = args_list
 
 	seq = []
 	sig = []
@@ -25,10 +25,11 @@ def load_data(args_list):
 		batch_sig = np.memmap( data_dir + "/" + batch + '_signal.npy', mode='r', shape=(size,400), dtype="float32")
 		batch_extra = np.memmap(data_dir + "/" +  batch + '_extra.npy', mode='r', shape=(size), dtype="<U70")
 		
-		if idxs[batch].get(motif):	
-			seq.append(batch_seq[idxs[batch][motif]])
-			sig.append(batch_sig[idxs[batch][motif]])
-			extra.append(batch_extra[idxs[batch][motif]])
+		if idxs[batch].get(motif):
+			idx = idxs[batch][motif]
+			seq.append(batch_seq[idx])
+			sig.append(batch_sig[idx])
+			extra.append(batch_extra[idx])
 		print(f'{motif} {batch} finish')
 		del batch_seq
 		del batch_sig
@@ -76,7 +77,8 @@ def main():
 	if not os.path.exists(args.out_dir):
 		os.makedirs(args.out_dir)
 	
-
+	global chunks,idxs
+	
 	chunks = {}
 	idxs = {}
 	motifs = []
@@ -100,7 +102,7 @@ def main():
 
 	motifs = list(set(motifs))
 
-	args_lists = [(motif, args.data_dir, args.out_dir, chunks, idxs, args.size) for motif in motifs]	
+	args_lists = [(motif, args.data_dir, args.out_dir, args.size) for motif in motifs]	
 
 	p = multiprocessing.Pool(args.process)
 	p.map(load_data, args_lists)
