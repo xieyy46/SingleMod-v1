@@ -121,7 +121,7 @@ wait
 cd tmp_features
 wc -l *_extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
 
-python -u SingleMod/split_into_motif.py -d tmp_features -o features
+python -u SingleMod/merge_motif_npy.py -d tmp_features -o features
 ```
 * `tmp_features`: path to directory containing intermediate file.  
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
