@@ -33,8 +33,8 @@ python modules:
 SingleMod code:
 | Code | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
-| organize_from_eventalign.py  | extra and organize raw signals from nanopolish eventalign result | |
-| split_into_motif.py  | extra and organize raw signals into different motifs | |
+| organize_from_eventalign_new.py  | extra and organize raw signals from nanopolish eventalign result | |
+| merge_motif_npy.py  | extra and organize raw signals into different motifs | |
 | SingleMod_m6A_prediction.py  | predict m6A modification within each molecule | |
 | bam_mark_m6A.py  | mark m6A modifications into bam file for visualization of single-molecule m6A | |
 | SingleMod_train.py | training your own models | **needed only for training your own models** |
@@ -114,7 +114,7 @@ batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0
 for i in ${batch[@]}
 do
 {
-python -u SingleMod/organize_from_eventalign.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_evenalign.txt -o tmp_features -p $i
+python -u SingleMod/organize_from_eventalign_new.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_evenalign.txt -o tmp_features -p $i
 } &
 done
 wait
