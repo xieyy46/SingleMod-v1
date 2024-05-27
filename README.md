@@ -78,7 +78,7 @@ done
 mkdir eventalign_output_dir
 
 #making index
-nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt
+nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt basecall_output_dir/merge.fastq
 # or if you donot have sequencing_summary.txt, but much slower: nanopolish index --directory=fast5_dir basecall_output_dir/merge.fastq
 
 #parallelly nanopolish eventalign 
@@ -100,7 +100,7 @@ mkdir tmp_features
 mkdir features
 
 cd split_bam_dir
-#convert bam to bed to extra strand information
+#convert bam to bed to extra strand informationt
 for file in shard*bam
 do
 {
@@ -114,7 +114,7 @@ batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0
 for i in ${batch[@]}
 do
 {
-python -u SingleMod/organize_from_eventalign_new.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_evenalign.txt -o tmp_features -p $i
+python -u SingleMod/organize_from_eventalign_new.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i
 } &
 done
 wait
