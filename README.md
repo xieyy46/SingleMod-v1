@@ -56,9 +56,9 @@ mkdir split_bam_dir
 
 #mapping
 cat basecall_output_dir/pass/*fastq > basecall_output_dir/merge.fastq # ignore, if you have merge your fastq files
-#mapping to genome.fa  
+#if mapping to genome.fa  
 minimap2 -ax splice -k 14 reference.fa -t 25 --secondary=no basecall_output_dir/merge.fastq -o sample_name.sam # ignore, if you have mapped your reads
-#mapping to transcript.fa 
+#if mapping to transcript.fa 
 minimap2 -ax map-ont -k 14 reference.fa -t 25 --secondary=no basecall_output_dir/merge.fastq -o sample_name.sam # ignore, if you have mapped your reads
 
 samtools view -@ 30 -F 2048 -F 4 -b sample_name.sam | samtools sort -O BAM -@ 20  -o sample_name.bam
