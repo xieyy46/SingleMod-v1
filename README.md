@@ -123,7 +123,7 @@ python -u SingleMod/organize_from_eventalign_new.py -b split_bam_dir/${i}.bed -e
 done
 wait
 cd tmp_features
-wc -l *_extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
+wc -l *-extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
 
 python -u SingleMod/merge_motif_npy.py -d tmp_features -o features
 ```
