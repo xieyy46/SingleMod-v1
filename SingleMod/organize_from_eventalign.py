@@ -71,7 +71,7 @@ def eventalign_process(kit,eventalign,strands,motifs,out_dir,prefix,size):
 		if kit == "004":
 			memmap_seq[motif] = np.memmap(out_dir + "/" + prefix + "-"+ motif + '-sequence.npy', mode='w+', shape=(size,400,9), dtype="int8")
 		memmap_sig[motif] = np.memmap(out_dir + "/" + prefix + "-"+ motif + '-signal.npy', mode='w+', shape=(size,400), dtype="float32")
-		memmap_extra[motif] = np.memmap(out_dir + "/" + prefix + "-"+ motif + '-extra.npy', mode='w+', shape=(size), dtype="<U70")
+		memmap_extra[motif] = np.memmap(out_dir + "/" + prefix + "-"+ motif + '-extra.npy', mode='w+', shape=(size), dtype="<U80")
 
 		#index
 		idx[motif] = 0
