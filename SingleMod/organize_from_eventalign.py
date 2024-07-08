@@ -167,7 +167,7 @@ def main():
 	
 	#parameters setting
 	parser = argparse.ArgumentParser(description='extra and organize raw signals from nanopolish eventalign result')
-	parser.add_argument('-k','--kit',type=str,default="002",required = False, help="the RNA kit version of DRS data, '002' for RNA002 kit and '004' for RNA004 kit")
+	parser.add_argument('-v','--kit',type=str,default="002",required = False, help="the RNA kit version of DRS data, '002' for RNA002 kit and '004' for RNA004 kit")
 	parser.add_argument('-b','--bed',required = True, help="the path to bed file")
 	parser.add_argument('-e','--eventalign',required = True, help="the path to eventalign.txt")
 	parser.add_argument('-o','--out_dir',required = True, help="the directory saving output results")
