@@ -71,7 +71,7 @@ def main():
 	parser.add_argument('-d','--data_dir',required = True, help="the directory containing npy files and extra_info.txt (the output directory of organize_from_eventalign.py)")
 	parser.add_argument('-o','--out_dir',required = True, help="the directory saving output results")
 	parser.add_argument('-s','--size',type=int,default=500000,required = False, help="the first dimension of npy files (the size setting when runing organize_from_eventalign.py). If error occur, do not use default setting")
-	parser.add_argument('-p','--process',type=int,default=8,required = False, help="the number of process; default setting is 20")
+	parser.add_argument('-p','--process',type=int,default=8,required = False, help="the number of process; default setting is 8. This setting is dependent on the memory of your computer")
 	args = parser.parse_args(sys.argv[1:])
 
 	if not os.path.exists(args.data_dir):
