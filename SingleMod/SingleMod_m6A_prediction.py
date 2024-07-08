@@ -337,7 +337,7 @@ def main():
 	motif_sig = np.memmap( args.npy_dir + "/" + args.motif + "_signal.npy", mode='r', shape=(lengths,400), dtype="float32")
 
 	dataset = MilDataset(motif_seq, motif_sig,motif_extra)
-	test_dl = DataLoader(dataset,shuffle = False,batch_size = 30000)	
+	test_dl = DataLoader(dataset,shuffle = False,batch_size = args.batch_size)	
 	
 	if args.gpu == -1:
 		device = torch.device('cpu')
