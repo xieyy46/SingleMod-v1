@@ -320,7 +320,7 @@ def main():
 	args = parser.parse_args(sys.argv[1:])
 
 	try:
-		motif_extra = np.memmap(args.npy_dir + "/" + args.motif + "_extra.npy", mode='r', dtype="<U70")
+		motif_extra = np.memmap(args.npy_dir + "/" + args.motif + "_extra.npy", mode='r', dtype="<U80")
 		print(f'predicting m6A within {args.motif} motif start')
 	except FileNotFoundError:
 		print("do not find specified motif in your data")
