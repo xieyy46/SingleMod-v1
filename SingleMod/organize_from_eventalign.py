@@ -167,12 +167,12 @@ def main():
 	
 	#parameters setting
 	parser = argparse.ArgumentParser(description='extra and organize raw signals from nanopolish eventalign result')
-	parser.add_argument('-v','--kit',type=str,default="002",required = False, help="the RNA kit version of DRS data, '002' for RNA002 kit and '004' for RNA004 kit")
+	parser.add_argument('-k','--kit',type=str,default="002",required = False, help="the RNA kit version of DRS data, '002' for RNA002 kit and '004' for RNA004 kit")
 	parser.add_argument('-b','--bed',required = True, help="the path to bed file")
 	parser.add_argument('-e','--eventalign',required = True, help="the path to eventalign.txt")
 	parser.add_argument('-o','--out_dir',required = True, help="the directory saving output results")
 	parser.add_argument('-p','--prefix',required = True, help="the prefix of output results")
-	parser.add_argument('-s','--size',type=int,default=18000000,required = False, help="the first dimension of memmap files; default setting is 18000000, which is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 36000000, 10-15G: 54000000")
+	parser.add_argument('-s','--size',type=int,default=500000,required = False, help="the first dimension of memmap files; default setting is 500000. If run in 25 batchs, 500000 is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 1000000, 10-15G: 1500000")
 	args = parser.parse_args(sys.argv[1:])
 
 	if not (os.path.exists(args.bed) and os.path.exists(args.eventalign)):
