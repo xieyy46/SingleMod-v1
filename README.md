@@ -5,7 +5,7 @@ Correspondence to: zhangzhang@mail.sysu.edu.cn and luogzh5@mail.sysu.edu.cn
 ![schematic illustration of SingleMod](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/schematic%20illustration.png)
 A deep learning model designed for the precise detection of m6A within single RNA molecules using nanopore DRS data. SingleMod is trained through a deep multiple instance regression framework, carefully tailored to harness the extensive methylation-rate labels. SingleMod is a generizable framework which can be easily adopted to train model for other Nucleic Acid Modifications.   
 
-**Note:** We support the use of direct RNA sequencing data collected with the RNA002kit, as well as the latest direct RNA sequencing data collected with the RNA004kit.
+**Note:** We support the use of direct RNA sequencing data collected with the RNA002 kit, as well as the latest direct RNA sequencing data collected with the RNA004 kit.
 
 # Requisites
 Data preparing:
@@ -23,10 +23,11 @@ Softwares:
 | Tool | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
 | Guppy   | generate fastq from fast5 through basecalling  | ignored, if your fast5 has been basecalled |
-| dorado   | generate fastq from fast5 through basecalling  | for RNA004 data, ignored, if your fast5 has been basecalled |
+| dorado   | generate fastq from pod5 through basecalling  | for RNA004 data, ignored, if your pod5 has been basecalled |
 | minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
 | Picard | split bam file to multiples one | allowing for parallel processing, significantly saving time |
 | nanopolish | eventalign, assign current signals to bases | |
+| pod5 | convert pod5 format to fast5 format for f5c | for RNA004 data |
 | f5c | eventalign, assign current signals to bases | for RNA004 data |
 
 python modules:
@@ -59,11 +60,12 @@ RNA002:
 guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'
 
 RNA004:
-dorado basecaller rna004_130bps_sup@v3.0.1 fast5_dir -x 'cuda:0' > basecall_output_dir/calls.bam
+dorado basecaller rna004_130bps_sup@v3.0.1 pod5_dir -x 'cuda:0' > basecall_output_dir/calls.bam
 dorado summary basecall_output_dir/calls.bam > basecall_output_dir/calls.summary
 samtools fastq basecall_output_dir/calls.bam  > basecall_output_dir/calls.fastq
 ```
-* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).  
+* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).
+* `pod5_dir`: path to directory containing your pod5 files (xxx.pod5).  
 * `basecall_output_dir`: path to directory containing outputs during basecalling process.
 
 2, mapping and spliting bam file
@@ -105,6 +107,7 @@ RNA002:
 nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt basecall_output_dir/merge.fastq
 # or if you donot have sequencing_summary.txt, but much slower: nanopolish index --directory=fast5_dir basecall_output_dir/merge.fastq
 RNA004:
+pod5 convert to_fast5 pod5_dir/ --output fast5_dir/
 f5c index --iop 4 -d fast5_dir basecall_output_dir/merge.fastq
 
 #parallelly nanopolish eventalign
