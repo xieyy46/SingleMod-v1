@@ -70,7 +70,6 @@ mkdir split_bam_dir
 #mapping
 RNA002:
 cat basecall_output_dir/pass/*fastq > basecall_output_dir/merge.fastq # ignore, if you have merge your fastq files
-
 RNA004:
 mv basecall_output_dir/calls.fastq basecall_output_dir/merge.fastq
 #if mapping to genome.fa  
@@ -94,20 +93,32 @@ done
 * `--SPLIT_TO_N_FILES 25`: how many files sample_name.bam should be split into for following parallel processing. This value can be adjust.
 * The default prefix for split bam files is shard_xxxx.  
 
-3, nanopolish eventalign  
+3, eventalign  
 ```
 mkdir eventalign_output_dir
 
 #making index
+RNA002:
 nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt basecall_output_dir/merge.fastq
 # or if you donot have sequencing_summary.txt, but much slower: nanopolish index --directory=fast5_dir basecall_output_dir/merge.fastq
+RNA004:
+f5c index --iop 4 -d fast5_dir basecall_output_dir/merge.fastq
 
-#parallelly nanopolish eventalign 
+#parallelly nanopolish eventalign
+RNA002:
 for file in split_bam_dir/*.bam
 do
 {
 info=(${file//// })
 nanopolish eventalign --reads basecall_output_dir/merge.fastq --bam $file --genome reference.fa -t 15 --scale-events --samples --signal-index --summary eventalign_output_dir/${info[-1]%%.bam}_summary.txt --print-read-names > eventalign_output_dir/${info[-1]%%.bam}_eventalign.txt
+} &
+done
+RNA004:
+for file in split_bam_dir/*.bam
+do
+{
+info=(${file//// })
+f5c eventalign -r basecall_output_dir/merge.fastq -b $file -g reference.fa -t 15 --pore rna004 --rna --scale-events --samples --signal-index --summary eventalign_output_dir/${info[-1]%%.bam}_summary.txt --print-read-names > eventalign_output_dir/${info[-1]%%.bam}_eventalign.txt
 } &
 done
 #if run out of memory, please run in batches
@@ -135,15 +146,16 @@ batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0
 for i in ${batch[@]}
 do
 {
-python -u SingleMod/organize_from_eventalign_new.py -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i
+python -u SingleMod/organize_from_eventalign_new.py -v 002|004 -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i
 } &
 done
 wait
 cd tmp_features
 wc -l *-extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
 
-python -u SingleMod/merge_motif_npy.py -d tmp_features -o features
+python -u SingleMod/merge_motif_npy.py -v 002|004 -d tmp_features -o features
 ```
+* `-v 002|004`: based on your data, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
 * `tmp_features`: path to directory containing intermediate file.  
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
 
@@ -152,11 +164,18 @@ python -u SingleMod/merge_motif_npy.py -d tmp_features -o features
 mkdir prediction
 
 #predicting
-# we now support m6A prediction within 39 motifs
+# we now support m6A prediction within 39 motifs for RNA002 data
 for motif in AAACA AAACC AAACG AAACT AAATA AAATT AGACA AGACC AGACG AGACT AGATT ATACT CAACT CGACT CTACT GAACA GAACC GAACG GAACT GAATA GAATC GAATG GAATT GGACA GGACC GGACG GGACT GGATA GGATC GGATG GGATT GTACT TAACT 
  TGACA TGACC TGACG TGACT TTACA TTACT
 do
-python -u SingleMod/SingleMod_m6A_prediction.py -d features -k $motif -m models/model_${motif}.pth.tar -g 0 -b 30000 -o prediction/${motif}_prediction.txt
+python -u SingleMod/SingleMod_m6A_prediction.py -v 002 -d features -k $motif -m models/model_${motif}.pth.tar -g 0 -b 30000 -o prediction/${motif}_prediction.txt
+done
+
+#36 motifs for RNA004 data
+for motif in AAACA AAACC AAACG AAACT AAATA AAATT AGACA AGACC AGACG AGACT AGATT ATACT CAACT CGACT CTACT GAACA GAACC GAACT GAATA GAATG GAATT GGACA GGACC GGACG GGACT GGATA GGATC GGATG GGATT GTACT TAACA TAACT TGACA
+ TGACC TGACT TTACT
+do
+python -u SingleMod/SingleMod_m6A_prediction.py -v 004 -d features -k $motif -m models/model_${motif}.pth.tar -g 0 -b 30000 -o prediction/${motif}_prediction.txt
 done
 
 #organizing the results
