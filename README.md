@@ -24,6 +24,7 @@ Softwares:
 | minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
 | Picard | split bam file to multiples one | allowing for parallel processing, significantly saving time |
 | nanopolish | eventalign, assign current signals to bases | |
+| f5c | eventalign, assign current signals to bases | for RNA004 data |
 
 python modules:
 | Module | Usage | Note |
@@ -34,13 +35,16 @@ python modules:
 SingleMod code:
 | Code | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
-| organize_from_eventalign_new.py  | extra and organize raw signals from nanopolish eventalign result | |
+| organize_from_eventalign.py  | extra and organize raw signals from nanopolish eventalign result | |
 | merge_motif_npy.py  | extra and organize raw signals into different motifs | |
 | SingleMod_m6A_prediction.py  | predict m6A modification within each molecule | |
 | bam_mark_m6A.py  | mark m6A modifications into bam file for visualization of single-molecule m6A | |
 | SingleMod_train.py | training your own models | **needed only for training your own models** |
 
-SingleMod models: https://github.com/xieyy46/SingleMod-v1/tree/main/models   
+SingleMod models:   
+RNA002 (mammal): https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA002/mammal    
+RNA002 (non-mammal): https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA002/non-mammal    
+RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004   
 
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
