@@ -1,5 +1,5 @@
 # Data   
-Test data (RNA002) is a subset of Chlamydomonas DRS data (the whole data can be found in GSE246632). 
+Test data (RNA002) is a subset of Chlamydomonas DRS data (the whole data can be found in GSE246632).  
 Test data (RNA004) is a subset of HEK293T DRS data. 
 
 # reference  
