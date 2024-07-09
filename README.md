@@ -54,15 +54,14 @@ RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004
 ```
 RNA002:
 guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'
-```  
-* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).  
-* `basecall_output_dir`: path to directory containing outputs during basecalling process.
-```
+
 RNA004:
 dorado basecaller rna004_130bps_sup@v3.0.1 fast5_dir -x 'cuda:0' > basecall_output_dir/calls.bam
 dorado summary basecall_output_dir/calls.bam > basecall_output_dir/calls.summary
 samtools fastq basecall_output_dir/calls.bam  > basecall_output_dir/calls.fastq
 ```
+* `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).  
+* `basecall_output_dir`: path to directory containing outputs during basecalling process.
 
 2, mapping and spliting bam file
 ```
@@ -71,6 +70,7 @@ mkdir split_bam_dir
 #mapping
 RNA002:
 cat basecall_output_dir/pass/*fastq > basecall_output_dir/merge.fastq # ignore, if you have merge your fastq files
+
 RNA004:
 mv basecall_output_dir/calls.fastq basecall_output_dir/merge.fastq
 #if mapping to genome.fa  
