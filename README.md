@@ -19,7 +19,8 @@ Python3.6+ is required.
 Softwares:
 | Tool | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
-| Guppy  | generate fastq from fast5 through basecalling  | ignored, if your fast5 has been basecalled |
+| Guppy   | generate fastq from fast5 through basecalling  | ignored, if your fast5 has been basecalled |
+| dorado   | generate fastq from fast5 through basecalling  | for RNA004 data, ignored, if your fast5 has been basecalled |
 | minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
 | Picard | split bam file to multiples one | allowing for parallel processing, significantly saving time |
 | nanopolish | eventalign, assign current signals to bases | |
@@ -43,7 +44,7 @@ SingleMod models: https://github.com/xieyy46/SingleMod-v1/tree/main/models
 
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
-#Welcome to use our test data for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
+#Welcome to use our test data （RNA002;RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 `guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'`  
