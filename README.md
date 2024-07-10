@@ -210,7 +210,7 @@ mkdir training
 mkdir training/motif
 mkdir training/motif/rep
 
-python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,SampleN \
+python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN \
 -seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy \
 -sig Sample1_features/motif_signal.npy,Sample2_features/motif_signal.npy,...,SampleN_features/motif_signal.npy \
 -ext Sample1_features/motif_extra.npy,Sample2_features/motif_extra.npy,...,SampleN_features/motif_extra.npy \
@@ -222,7 +222,7 @@ python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,
 * `motif`: motif specified.
 * `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
 * `g`: cuda index, default is 0
-* `d`: the absolute quantification data of m6A, its most basic format is as follow:   
+* `d`: the absolute quantification data of modification, its most basic format is as follow:   
 (chromosome location-1  location  *  methylation_rate  strand  kmer)   
 chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
 chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
