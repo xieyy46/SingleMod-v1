@@ -210,10 +210,22 @@ mkdir training
 mkdir training/motif
 mkdir training/motif/rep
 
-python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,SampleN -seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy
-
+python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,SampleN \
+-seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy \
+-sig Sample1_features/motif_signal.npy,Sample2_features/motif_signal.npy,...,SampleN_features/motif_signal.npy \
+-ext Sample1_features/motif_extra.npy,Sample2_features/motif_extra.npy,...,SampleN_features/motif_extra.npy \
+-d Sample1_label,Sample2_label,...,SampleN_label \
+-m motif -r rep -g 0 \
+-o training/motif/rep > training/motif/rep/training.log
 ```
-
+* `training`: directory containing model training results.
+* `motif`: motif specified.
+* `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
+* `g`: cuda index, default is 0
+* `d`: the absolute quantification data of m6A, its most basic format is as follow:
+(chromosome location-1  location  *  methylation_rate  strand  kmer)  
+chr1    15878   15879   *  0.0290404       -       CGCCAAGCT 
+chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC
 
 7, visualization of single-molecule m6A in IGV (optional)
 ```
