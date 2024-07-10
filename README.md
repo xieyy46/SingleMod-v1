@@ -161,7 +161,7 @@ wc -l *-extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.
 
 python -u SingleMod/merge_motif_npy.py -v 002|004 -d tmp_features -o features
 ```
-* `-v 002|004`: based on your data, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
+* `-v`: DRS kit used, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
 * `tmp_features`: path to directory containing intermediate file.  
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
 
@@ -244,15 +244,16 @@ python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN
 -sig Sample1_features/motif_signal.npy,Sample2_features/motif_signal.npy,...,SampleN_features/motif_signal.npy \
 -ext Sample1_features/motif_extra.npy,Sample2_features/motif_extra.npy,...,SampleN_features/motif_extra.npy \
 -d Sample1_label,Sample2_label,...,SampleN_label \
--m motif -r rep -g 0 \
+-m motif -r 0 -g 0 \
 -o training/motif/rep > training/motif/rep/training.log
 ```
 * `training`: directory containing model training results.
-* `motif`: motif specified.
-* `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
-* `g`: cuda index, default is using CPU
-* `d`: bed file containing the absolute quantification information (methylation rates), its format is as follow:   
-(chromosome location-1  location  *  methylation_rate  strand  kmer)   
+* `-v`: DRS kit used, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
+* `-m`: motif specified.
+* `-r`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
+* `-g`: cuda index, default is using CPU
+* `-d`: bed file containing the absolute quantification information (methylation rates), its format is as follow:   
+(chromosvome location-1  location  *  methylation_rate  strand  kmer)   
 chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
 chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
 
