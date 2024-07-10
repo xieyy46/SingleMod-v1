@@ -204,6 +204,16 @@ chr5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
 chr1  16677290  16677291  chr1|16677291|+|AAACA  0.156863  +  51   8  AAACA  
 chr1  16677516  16677517  chr1|16677517|+|AAACA  0.037736  +  53   2  AAACA
 
+6, trainging model
+```
+mkdir training
+mkdir training/motif
+mkdir training/motif/rep
+
+python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,SampleN -seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy
+
+```
+
 
 7, visualization of single-molecule m6A in IGV (optional)
 ```
