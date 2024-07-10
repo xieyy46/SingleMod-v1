@@ -222,10 +222,10 @@ python -u SingleMod/SingleMod_m6A_training.py -v 002|004 -s Sample1,Sample2,...,
 * `motif`: motif specified.
 * `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
 * `g`: cuda index, default is 0
-* `d`: the absolute quantification data of m6A, its most basic format is as follow:
-(chromosome location-1  location  *  methylation_rate  strand  kmer)  
-chr1    15878   15879   *  0.0290404       -       CGCCAAGCT 
-chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC
+* `d`: the absolute quantification data of m6A, its most basic format is as follow:   
+(chromosome location-1  location  *  methylation_rate  strand  kmer)   
+chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
+chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
 
 7, visualization of single-molecule m6A in IGV (optional)
 ```
