@@ -232,8 +232,8 @@ Load the m6A-marked bam file into IGV. A representative gene snapshot is shown b
 
 ![MCL1 single-molecule m6A](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/MCL1_single-molecule_m6A.png)
 
-# Training your own models to detect modifications at single-molecule level
-#You can also train new models, including m6A models in other motifs, or models for other types of modifications.
+# Training your own models
+#You can train new models to detect modifications at single-molecule level, including m6A models in other motifs, or models for other types of modifications.
 ```
 mkdir training
 mkdir training/motif
@@ -250,8 +250,8 @@ python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN
 * `training`: directory containing model training results.
 * `motif`: motif specified.
 * `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
-* `g`: cuda index, default is 0
-* `d`: the absolute quantification data of modification, its most basic format is as follow:   
+* `g`: cuda index, default is using CPU
+* `d`: bed file containing the absolute quantification information (methylation rates), its format is as follow:   
 (chromosome location-1  location  *  methylation_rate  strand  kmer)   
 chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
 chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
