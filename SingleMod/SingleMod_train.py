@@ -1,3 +1,11 @@
+################################################################################
+#                                                                              #
+#                               SingleMod v1                                   #
+#               Ying-Yuan Xie, Zhen-Dong Zhong, Hong-Xuan Chen                 #   
+# Correspondence to: zhangzhang@mail.sysu.edu.cn and luogzh5@mail.sysu.edu.cn  #                
+#                                                                              #
+################################################################################
+
 import sys
 import os
 import torch
