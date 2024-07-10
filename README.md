@@ -232,8 +232,8 @@ Load the m6A-marked bam file into IGV. A representative gene snapshot is shown b
 
 ![MCL1 single-molecule m6A](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/MCL1_single-molecule_m6A.png)
 
-# Training SingleMod
-#You can also train new models, including m6A models corresponding to a variety of motifs, or models for other types of modifications.
+# Training your own models to detect modifications at single-molecule level
+#You can also train new models, including m6A models in other motifs, or models for other types of modifications.
 ```
 mkdir training
 mkdir training/motif
