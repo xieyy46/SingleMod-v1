@@ -589,7 +589,7 @@ def main():
 	parser.add_argument('-r','--replicate',type=int,default=0,required = False, help="experiment batch index, used to set seed when split data into train, validate and test set, default is 0")
 	parser.add_argument('-e','--epochs',type=int,default=200,required = False, help="training epochs, default is 200")
 	parser.add_argument('-b','--batch_size',type=int,default=10,required = False, help="training batch size, default is 10")
-	parser.add_argument('-g','--gpu',type=int,default=0,required = False, help="cuda index, default is 0")	
+	parser.add_argument('-g','--gpu',type=int,default=-1,required = False, help="cuda index, default is using CPU; if you use GPU, please specify the cuda index")	
 	parser.add_argument('-o','--out_dir',default="./",required = False, help="the directory to output model and log, default is current directory")
 	args = parser.parse_args(sys.argv[1:])
 
@@ -636,9 +636,13 @@ def main():
 	print("construct training data finish")
 	
 	#training
-
-	os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
-	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	#setting device
+	if args.gpu == -1:
+		device = torch.device('cpu')
+	else:
+		os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
+		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	
 	if args.kit == "002":
 		train_002(train_dl,val_dl,test_dl,args.epochs,args.out_dir,device)
 	if args.kit == "004":
