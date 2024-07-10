@@ -204,30 +204,7 @@ chr5|747885|+|388ca3b1-1353-4dbc-a5c9-b3fdf0ed5818|AAACA  4.8746630335547135e-34
 chr1  16677290  16677291  chr1|16677291|+|AAACA  0.156863  +  51   8  AAACA  
 chr1  16677516  16677517  chr1|16677517|+|AAACA  0.037736  +  53   2  AAACA
 
-6, trainging model
-```
-mkdir training
-mkdir training/motif
-mkdir training/motif/rep
-
-python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN \
--seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy \
--sig Sample1_features/motif_signal.npy,Sample2_features/motif_signal.npy,...,SampleN_features/motif_signal.npy \
--ext Sample1_features/motif_extra.npy,Sample2_features/motif_extra.npy,...,SampleN_features/motif_extra.npy \
--d Sample1_label,Sample2_label,...,SampleN_label \
--m motif -r rep -g 0 \
--o training/motif/rep > training/motif/rep/training.log
-```
-* `training`: directory containing model training results.
-* `motif`: motif specified.
-* `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
-* `g`: cuda index, default is 0
-* `d`: the absolute quantification data of modification, its most basic format is as follow:   
-(chromosome location-1  location  *  methylation_rate  strand  kmer)   
-chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
-chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
-
-7, visualization of single-molecule m6A in IGV (optional)
+6, visualization of single-molecule m6A in IGV (optional)
 ```
 mkdir marked
 
@@ -255,6 +232,29 @@ Load the m6A-marked bam file into IGV. A representative gene snapshot is shown b
 
 ![MCL1 single-molecule m6A](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/MCL1_single-molecule_m6A.png)
 
+# Training SingleMod
+#You can also train new models, including m6A models corresponding to a variety of motifs, or models for other types of modifications.
+```
+mkdir training
+mkdir training/motif
+mkdir training/motif/rep
+
+python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN \
+-seq Sample1_features/motif_sequence.npy,Sample2_features/motif_sequence.npy,...,SampleN_features/motif_sequence.npy \
+-sig Sample1_features/motif_signal.npy,Sample2_features/motif_signal.npy,...,SampleN_features/motif_signal.npy \
+-ext Sample1_features/motif_extra.npy,Sample2_features/motif_extra.npy,...,SampleN_features/motif_extra.npy \
+-d Sample1_label,Sample2_label,...,SampleN_label \
+-m motif -r rep -g 0 \
+-o training/motif/rep > training/motif/rep/training.log
+```
+* `training`: directory containing model training results.
+* `motif`: motif specified.
+* `rep`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
+* `g`: cuda index, default is 0
+* `d`: the absolute quantification data of modification, its most basic format is as follow:   
+(chromosome location-1  location  *  methylation_rate  strand  kmer)   
+chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
+chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
 
 # Citing SingleMod
 # Data availability
