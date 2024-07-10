@@ -601,7 +601,8 @@ def main():
 	parser.add_argument('-o','--out_dir',default="./",required = False, help="the directory to output model and log, default is current directory")
 	args = parser.parse_args(sys.argv[1:])
 
-	print(	f'Samples: {args.sample}',
+	print(	f'Kit: {args.kit}',
+		f'Samples: {args.sample}',
 		f'Motif: {args.motif}',
 		f'Experiment batch: {args.replicate}',
 		f'Required coverage: {args.coverage}',
