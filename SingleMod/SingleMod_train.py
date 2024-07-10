@@ -84,13 +84,21 @@ def data_organize(sample, extra_npy, seq_npy, sig_npy, m6A_database, kit, covera
 		kmer[site_1] = info[6]
 	
 	idxs = {}
-	for idx,chunk in enumerate(motif_extra):
-		info = chunk.split("|")
-		site_1 = "|".join([info[0],str(int(info[1])+5),info[2]])
-		if site_1 in mr:
-			idxs.setdefault(site_1,[])
-			idxs[site_1].append(idx)
-	
+	if kit == "002":
+		for idx,chunk in enumerate(motif_extra):
+			info = chunk.split("|")
+			site_1 = "|".join([info[0],str(int(info[1])+3),info[2]])
+			if site_1 in mr:
+				idxs.setdefault(site_1,[])
+				idxs[site_1].append(idx)
+	if kit == "004":
+		for idx,chunk in enumerate(motif_extra):
+			info = chunk.split("|")
+			site_1 = "|".join([info[0],str(int(info[1])+5),info[2]])
+			if site_1 in mr:
+				idxs.setdefault(site_1,[])
+				idxs[site_1].append(idx)
+
 	#organize single read data into site data
 	for key,idx in idxs.items():
 		if len(idx) >= coverage:
