@@ -406,7 +406,7 @@ def train_002(train_dl,val_dl,test_dl,epochs,out_dir,device):
 			sig = sig.reshape(-1,1,400).to(device)
 			label = label.to(device)
 			with autocast():
-				outputs, prob , predictions = model(sig,seq,length)
+				outputs = model(sig,seq,length)
 				loss = criterion(outputs,label)
 			optimizer.zero_grad()
 			scaler.scale(loss).backward()
