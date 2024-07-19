@@ -5,13 +5,13 @@ Correspondence to: zhangzhang@mail.sysu.edu.cn and luogzh5@mail.sysu.edu.cn
 ![schematic illustration of SingleMod](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/schematic%20illustration.png)
 A deep learning model designed for the precise detection of m6A within single RNA molecules using nanopore DRS data. SingleMod is trained through a deep multiple instance regression framework, carefully tailored to harness the extensive methylation-rate labels. SingleMod is a generizable framework which can be easily adopted to train model for other Nucleic Acid Modifications.   
 
-**Note:** We support the use of direct RNA sequencing data collected with the RNA002 kit, as well as the latest direct RNA sequencing data collected with the RNA004 kit.
+**Note:** We support the use of direct RNA sequencing data produced with the RNA002 kit, as well as the latest RNA004 kit.
 
 # Requisites
 Data preparing:
 | Data | Note | 
 |:--------------:|:----------------------------:|
-| fast5 files |  containing raw current signals |
+| fast5 or pod5 files |  containing raw current signals |
 | reference.fa | genome.fa or transcript.fa, we recommend genome.fa|
 | methylation_rate.bed | methylation-rate labels, **needed only for training your own models** |
 
@@ -27,7 +27,7 @@ Softwares:
 | minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
 | Picard | split bam file to multiples one | allowing for parallel processing, significantly saving time |
 | nanopolish | eventalign, assign current signals to bases | |
-| pod5 | convert pod5 format to fast5 format for f5c | for RNA004 data |
+| pod5 | convert pod5 format to fast5 format | for RNA004 data |
 | f5c | eventalign, assign current signals to bases | for RNA004 data |
 
 python modules:
@@ -52,21 +52,22 @@ RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004
 
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
-#Welcome to use our test data （RNA002; RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
+#Welcome to use our test data （including both RNA002 and RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 ```
 RNA002:
-guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'auto'
+guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'cuda:all'
 
 RNA004:
-dorado basecaller rna004_130bps_sup@v3.0.1 pod5_dir -x 'cuda:0' > basecall_output_dir/calls.bam
+dorado basecaller rna004_130bps_sup@v3.0.1 pod5_dir -x 'cuda:all' > basecall_output_dir/calls.bam
 dorado summary basecall_output_dir/calls.bam > basecall_output_dir/calls.summary
 samtools fastq basecall_output_dir/calls.bam  > basecall_output_dir/calls.fastq
 ```
 * `fast5_dir`: path to directory containing your fast5 files (xxx.fast5).
 * `pod5_dir`: path to directory containing your pod5 files (xxx.pod5).  
 * `basecall_output_dir`: path to directory containing outputs during basecalling process.
+* `-x`: specify cuda index to use GPU for basecalling.
 
 2, mapping and spliting bam file
 ```
@@ -138,7 +139,7 @@ mkdir tmp_features
 mkdir features
 
 cd split_bam_dir
-#convert bam to bed to extra strand informationt
+#convert bam to bed to extract strand informationt
 for file in shard*bam
 do
 {
