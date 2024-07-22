@@ -153,7 +153,7 @@ batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0
 for i in ${batch[@]}
 do
 {
-python -u SingleMod/organize_from_eventalign_new.py -v 002|004 -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i
+python -u SingleMod/organize_from_eventalign_new.py -v 002|004 -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i -s 500000
 } &
 done
 wait
@@ -163,6 +163,7 @@ wc -l *-extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.
 python -u SingleMod/merge_motif_npy.py -v 002|004 -d tmp_features -o features
 ```
 * `-v`: DRS kit used, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
+* `-s`: the first dimension of memmap files (size), default setting is 500000. If run in 25 parallel batchs, 500000 is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 1000000, 10-15G: 1500000. 
 * `tmp_features`: path to directory containing intermediate file.  
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
 
