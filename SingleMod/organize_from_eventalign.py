@@ -184,7 +184,11 @@ def main():
 	
 	#candidate motif
 	#the current version focuses on NDAYN motifs
-	motifs = [i + x + "A" + y +z for i in ["A","C","G","T"] for x in ["A","T","G"] for y in ["C","T"] for z in ["A","C","G","T"]]
+	#motifs = [i + x + "A" + y +z for i in ["A","C","G","T"] for x in ["A","T","G"] for y in ["C","T"] for z in ["A","C","G","T"]]
+	if args.kit == "002":
+		motifs = ["AAACA","AAACC","AAACG","AAACT","AAATA","AAATT","AGACA","AGACC","AGACG","AGACT","AGATT","ATACT","CAACT","CGACT","CTACT","GAACA","GAACC","GAACG","GAACT","GAATA","GAATC","GAATG","GAATT","GGACA","GGACC","GGACG","GGACT","GGATA","GGATC","GGATG","GGATT","GTACT","TAACT","TGACA","TGACC","TGACG","TGACT","TTACA","TTACT"]
+	if args.kit == "004":
+		motifs = ["AAACA","AAACC","AAACG","AAACT","AAATA","AAATT","AGACA","AGACC","AGACG","AGACT","AGATT","ATACT","CAACT","CGACT","CTACT","GAACA","GAACC","GAACT","GAATA","GAATG","GAATT","GGACA","GGACC","GGACG","GGACT","GGATA","GGATC","GGATG","GGATT","GTACT","TAACA","TAACT","TGACA","TGACC","TGACT","TTACT"]
 
 	#extra strand information from bed file
 	strands = {}
