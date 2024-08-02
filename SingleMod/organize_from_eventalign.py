@@ -20,8 +20,13 @@ def read_process(kit,database,read_name,strand,idx,motifs,memmap_sig,memmap_seq,
 	sites, kmers, signals = database
 	if kit == "002":
 		cans = set([sites[i] for i, kmer in enumerate(kmers) if kmer in motifs])
+		kmer_length = 5
+		motif_index_left,  motif_index_right = 0, 5
 	if kit == "004":
 		cans = set([sites[i] for i, kmer in enumerate(kmers) if kmer[2:7] in motifs])
+		kmer_length = 9
+		motif_index_left,  motif_index_right = 2, 7
+		
 	idx = idx
 	for can in cans:
 		first_index = sites.index(can)
@@ -32,10 +37,8 @@ def read_process(kit,database,read_name,strand,idx,motifs,memmap_sig,memmap_seq,
 		start_index = max(0, middle_index - 199)
 		end_index = min(len(kmers), middle_index + 201)
 
-		if kit == "002":
-			can_motif = kmers[middle_index]
-		if kit == "004":
-			can_motif = kmers[middle_index][2:7]
+		can_motif = kmers[middle_index][motif_index_left : motif_index_right]
+		
 		kmer_slice = kmers[start_index:end_index]
 		signal_slice = signals[start_index:end_index]
 	
@@ -43,11 +46,8 @@ def read_process(kit,database,read_name,strand,idx,motifs,memmap_sig,memmap_seq,
 		if len(signal_slice) == 400:
 			# to array
 			signal_slice_array = np.array(signal_slice, dtype="float32")
-			if kit == "002":
-				kmer_slice_array =  np.array([encoding_dict[i]  for i in "".join(kmer_slice)],dtype="int8").reshape(400,5)
-			if kit == "004":
-				kmer_slice_array =  np.array([encoding_dict[i]  for i in "".join(kmer_slice)],dtype="int8").reshape(400,9)
-			
+			kmer_slice_array =  np.array([encoding_dict[i]  for i in "".join(kmer_slice)],dtype="int8").reshape(400,kmer_length)
+		
 			motif_idx = idx[can_motif]			
 
 			memmap_sig[can_motif][motif_idx] = signal_slice_array
