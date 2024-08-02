@@ -91,8 +91,12 @@ def main():
 		chunks[motif][batch] = int(info[0])
 
 	#candidate motif
-	motifs = chunks.keys()
-
+	#motifs = chunks.keys()
+	if args.kit == "002":
+		motifs = ["AAACA","AAACC","AAACG","AAACT","AAATA","AAATT","AGACA","AGACC","AGACG","AGACT","AGATT","ATACT","CAACT","CGACT","CTACT","GAACA","GAACC","GAACG","GAACT","GAATA","GAATC","GAATG","GAATT","GGACA","GGACC","GGACG","GGACT","GGATA","GGATC","GGATG","GGATT","GTACT","TAACT","TGACA","TGACC","TGACG","TGACT","TTACA","TTACT"]
+	if args.kit == "004":
+		motifs = ["AAACA","AAACC","AAACG","AAACT","AAATA","AAATT","AGACA","AGACC","AGACG","AGACT","AGATT","ATACT","CAACT","CGACT","CTACT","GAACA","GAACC","GAACT","GAATA","GAATG","GAATT","GGACA","GGACC","GGACG","GGACT","GGATA","GGATC","GGATG","GGATT","GTACT","TAACA","TAACT","TGACA","TGACC","TGACT","TTACT"]
+		
 	args_lists = [(motif, args.kit, args.data_dir, args.out_dir, args.size) for motif in motifs]	
 
 	p = multiprocessing.Pool(args.process)
