@@ -36,7 +36,7 @@ python modules:
 | torch  | an open source Python machine learning library | |
 | adabound | optimize the model's parameters | **needed only for training your own models**|
 
-SingleMod code:
+SingleMod code (https://github.com/xieyy46/SingleMod-v1/tree/main/SingleMod):
 | Code | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
 | organize_from_eventalign.py  | extra and organize raw signals from nanopolish eventalign result | |
