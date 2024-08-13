@@ -53,6 +53,7 @@ RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004
 # Running SingleMod  
 #Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
 #Welcome to use our test data （including both RNA002 and RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test
+#While some key parameters of SingleMod are described below, it is advisable to understand all of its parameters before use through command python xx.py -h 
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 ```
