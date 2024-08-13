@@ -160,10 +160,10 @@ wait
 cd tmp_features #required step
 wc -l *-extra_info.txt | sed 's/^ *//g' | sed '$d' | tr " " "\t"   > extra_info.txt
 
-python -u SingleMod/merge_motif_npy.py -v 002|004 -d tmp_features -o features
+python -u SingleMod/merge_motif_npy.py -v 002|004 -d tmp_features -s 500000 -o features
 ```
 * `-v`: DRS kit used, choose either 002 (RNA002) or 004 (RNA004), with the default setting being 002.
-* `-s`: the first dimension of memmap files (size), default setting is 500000. If run in 25 parallel batchs, 500000 is enough to cover 5G DRS data. If your data is over 5G, set a larger size, for example 5-10G: 1000000, 10-15G: 1500000. 
+* `-s`: the first dimension of memmap files (size), default setting is 500000. If run in 25 parallel batchs, 500000 is enough to cover 5G (or ~5 millions reads) DRS data. If your data is over 5G, set a larger size, for example 5-10G: 1000000, 10-15G: 1500000. 
 * `tmp_features`: path to directory containing intermediate file.  
 * `features`: path to directory containing final input files to SingleMod for different motifs (including sequence.npy, signal.npy and extra.npy).   
 
