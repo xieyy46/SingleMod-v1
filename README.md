@@ -34,7 +34,9 @@ python modules:
 | Module | Usage | Note |
 |:--------------:|:----------------------------:|:----------------------------:|
 | torch  | an open source Python machine learning library | |
+| pysam  | bam files processing | mark m6A onto molecules for visualization in IGV |
 | adabound | optimize the model's parameters | **needed only for training your own models**|
+Check that you have the following **basic packages**: numpy, os, re, random, scipy, datetime, collections, argparse, multiprocessing, array
 
 SingleMod code (https://github.com/xieyy46/SingleMod-v1/tree/main/SingleMod):
 | Code | Usage | Note |
