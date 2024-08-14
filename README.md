@@ -60,10 +60,10 @@ RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 ```
-RNA002:
+#RNA002:
 guppy_basecaller -i fast5_dir -s basecall_output_dir -c rna_r9.4.1_70bps_hac.cfg -x 'cuda:all'
 
-RNA004:
+#RNA004:
 dorado basecaller rna004_130bps_sup@v3.0.1 pod5_dir -x 'cuda:all' > basecall_output_dir/calls.bam
 dorado summary basecall_output_dir/calls.bam > basecall_output_dir/calls.summary
 samtools fastq basecall_output_dir/calls.bam  > basecall_output_dir/calls.fastq
@@ -78,10 +78,12 @@ samtools fastq basecall_output_dir/calls.bam  > basecall_output_dir/calls.fastq
 mkdir split_bam_dir
 
 #mapping
-RNA002:
+#RNA002:
 cat basecall_output_dir/pass/*fastq > basecall_output_dir/merge.fastq # ignore, if you have merge your fastq files
-RNA004:
+
+#RNA004:
 mv basecall_output_dir/calls.fastq basecall_output_dir/merge.fastq
+
 #if mapping to genome.fa  
 minimap2 -ax splice -k 14 reference.fa -t 25 --secondary=no basecall_output_dir/merge.fastq -o sample_name.sam # ignore, if you have mapped your reads
 #if mapping to transcript.fa 
@@ -108,15 +110,16 @@ done
 mkdir eventalign_output_dir
 
 #making index
-RNA002:
+#RNA002:
 nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/sequencing_summary.txt basecall_output_dir/merge.fastq
 # or if you donot have sequencing_summary.txt, but much slower: nanopolish index --directory=fast5_dir basecall_output_dir/merge.fastq
-RNA004:
+
+#RNA004:
 pod5 convert to_fast5 pod5_dir/ --output fast5_dir/
 f5c index --iop 4 -d fast5_dir basecall_output_dir/merge.fastq
 
 #parallelly nanopolish eventalign
-RNA002:
+#RNA002:
 for file in split_bam_dir/*.bam
 do
 {
@@ -124,7 +127,8 @@ info=(${file//// })
 nanopolish eventalign --reads basecall_output_dir/merge.fastq --bam $file --genome reference.fa -t 15 --scale-events --samples --signal-index --summary eventalign_output_dir/${info[-1]%%.bam}_summary.txt --print-read-names > eventalign_output_dir/${info[-1]%%.bam}_eventalign.txt
 } &
 done
-RNA004:
+
+#RNA004:
 for file in split_bam_dir/*.bam
 do
 {
