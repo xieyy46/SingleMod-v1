@@ -56,9 +56,9 @@ RNA002 (non-mammal): https://github.com/xieyy46/SingleMod-v1/tree/main/models/RN
 RNA004: https://github.com/xieyy46/SingleMod-v1/tree/main/models/RNA004   
 
 # Running SingleMod  
-#Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
-#Welcome to use our test data （including both RNA002 and RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test.  
-#While some key parameters of SingleMod are described below, it is advisable to understand all of its parameters before use through command python xx.py -h 
+Following our pipeline, beginners in DRS can easily generate single-molecule m6A profile.    
+Welcome to use our test data （including both RNA002 and RNA004） for end-to-end practice; we also provide the expected results for each step: https://github.com/xieyy46/SingleMod-v1/tree/main/test.  
+While some key parameters of SingleMod are described below, it is advisable to understand **all of its parameters** before use through command **python xx.py -h** 
 
 1, basecalling # ignore, if your fast5 has been basecalled  
 ```
@@ -243,7 +243,7 @@ Load the m6A-marked bam file into IGV. A representative gene snapshot is shown b
 ![MCL1 single-molecule m6A](https://github.com/xieyy46/SingleMod-v1/blob/main/Figures/MCL1_single-molecule_m6A.png)
 
 # Training your own models
-#You can train new models to detect modifications at single-molecule level, including m6A models in other motifs, or models for other types of modifications.
+You can train new models to detect modifications at single-molecule level, including m6A models in other motifs, or models for other types of modifications.
 ```
 mkdir training
 mkdir training/motif
