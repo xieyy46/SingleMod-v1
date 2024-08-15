@@ -24,7 +24,7 @@ Softwares:
 |:--------------:|:----------------------------:|:----------------------------:|
 | Guppy   | generate fastq from fast5 through basecalling  | ignored, if your fast5 has been basecalled |
 | dorado   | generate fastq from pod5 through basecalling  | for RNA004 data, ignored, if your pod5 has been basecalled |
-| minimap2 | align reads to reference.fa  | ignored, if you have mapped your reads |
+| minimap2 | align reads to reference.fa  | |
 | samtools | bam files processing | |
 | bedtools | bed files processing | |
 | Picard | split bam file to multiple ones | allowing for parallel processing, significantly saving time |
