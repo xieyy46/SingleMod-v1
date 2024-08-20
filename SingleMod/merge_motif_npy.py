@@ -26,7 +26,7 @@ def load_data(args_list):
 		if kit == "004":
 			batch_seq = np.memmap( data_dir + "/" + batch + "-"+ motif + '-sequence.npy', mode='r', shape=(size,400,9), dtype="int8")
 		batch_sig = np.memmap( data_dir + "/" + batch + "-"+ motif + '-signal.npy', mode='r', shape=(size,400), dtype="float32")
-		batch_extra = np.memmap(data_dir + "/" + batch + "-"+ motif + '-extra.npy', mode='r', shape=(size), dtype="<U80")
+		batch_extra = np.memmap(data_dir + "/" + batch + "-"+ motif + '-extra.npy', mode='r', shape=(size), dtype="<U90")
 		
 		if chunk_number != 0:
 			seq.append(batch_seq[0:chunk_number])
@@ -45,7 +45,7 @@ def load_data(args_list):
 	#write to new memmap
 	motif_seq = np.memmap( out_dir + "/" + motif + '_sequence.npy', mode='w+', shape=seq.shape, dtype="int8")
 	motif_sig = np.memmap( out_dir + "/" + motif + '_signal.npy', mode='w+', shape=sig.shape, dtype="float32")
-	motif_extra = np.memmap(out_dir + "/" + motif + '_extra.npy', mode='w+', shape=extra.shape, dtype="<U80")
+	motif_extra = np.memmap(out_dir + "/" + motif + '_extra.npy', mode='w+', shape=extra.shape, dtype="<U90")
 	
 	motif_seq[:] = seq[:]
 	motif_sig[:] = sig[:]
