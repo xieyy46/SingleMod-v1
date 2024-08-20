@@ -65,7 +65,7 @@ def split_large_list(lst, max_chunk_size):
 
 def data_organize(sample, extra_npy, seq_npy, sig_npy, m6A_database, kit, coverage, seq, sig, label, extra, site):
 	#load data
-	motif_extra = np.memmap(extra_npy, mode='r', dtype="<U80")
+	motif_extra = np.memmap(extra_npy, mode='r', dtype="<U90")
 	#total chunks number
 	lengths = motif_extra.shape[0]
 	if kit == "002":
