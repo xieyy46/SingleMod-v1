@@ -165,8 +165,9 @@ def inference_002(test_dl,model_pare,out_file,device):
 		
 	for i in zip(test_extra,test_prob):
 		info = i[0].split("|")
-		site = "|".join([info[0],str(int(info[1])+3),info[2],info[3],info[4]])
-		print(site,i[1],sep="\t",file=f1,flush=True)
+		if len(info) == 5 :
+			site = "|".join([info[0],str(int(info[1])+3),info[2],info[3],info[4]])
+			print(site,i[1],sep="\t",file=f1,flush=True)
 	
 	f1.close()
 
