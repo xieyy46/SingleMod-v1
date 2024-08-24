@@ -238,6 +238,7 @@ samtools index merge.bam
 rm shard*
 ```
 * `marked`: path to directory containing m6A-marked bam file
+* in bam_mark_m6A.py, we use a threshold of **0.5** to determine m6A modification (**probability > 0.5**)
 
 Load the m6A-marked bam file into IGV. A representative gene snapshot is shown below (the gray and black vertical bars indicate A and m6A, respectively):  
 #To achieve a clearer visualization, it is necessary to modify some settings in IGV. Please following: https://github.com/xieyy46/SingleMod-v1/blob/main/test/RNA002/marked/README.md
