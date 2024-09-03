@@ -118,7 +118,7 @@ nanopolish index --directory=fast5_dir --sequencing-summary=basecall_output_dir/
 
 #RNA004:
 pod5 convert to_fast5 pod5_dir/ --output fast5_dir/
-f5c index --iop 4 -d fast5_dir basecall_output_dir/merge.fastq
+f5c index --iop 10 -t 10 -d fast5_dir basecall_output_dir/merge.fastq
 
 #parallelly nanopolish eventalign
 #RNA002:
