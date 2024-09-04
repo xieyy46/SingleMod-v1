@@ -163,7 +163,7 @@ batch=(shard_0001 shard_0002 shard_0003 shard_0004 shard_0005 shard_0006 shard_0
 for i in ${batch[@]}
 do
 {
-python -u SingleMod/organize_from_eventalign_new.py -v 002|004 -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i -s 500000
+python -u SingleMod/organize_from_eventalign.py -v 002|004 -b split_bam_dir/${i}.bed -e eventalign_output_dir/${i}_eventalign.txt -o tmp_features -p $i -s 500000
 } &
 done
 wait
