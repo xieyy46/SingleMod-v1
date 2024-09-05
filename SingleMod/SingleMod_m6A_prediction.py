@@ -323,7 +323,7 @@ def main():
 
 	try:
 		motif_extra = np.memmap(args.npy_dir + "/" + args.motif + "_extra.npy", mode='r', dtype="<U90")
-		print(f'predicting m6A within {args.motif} motif start')
+		print(f'predicting m6A within {args.motif} motif start, {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 	except FileNotFoundError:
 		print("do not find specified motif in your data")
 		print("exit")
@@ -350,7 +350,7 @@ def main():
 		inference_002(test_dl,args.model,args.out_file,device)
 	if args.kit == "004":
 		inference_004(test_dl,args.model,args.out_file,device)
-	print(f'predicting m6A within {args.motif} motif finish')
+	print(f'predicting m6A within {args.motif} motif finish, {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
 if __name__ == '__main__':
 	main()
