@@ -323,7 +323,6 @@ def main():
 
 	try:
 		motif_extra = np.memmap(args.npy_dir + "/" + args.motif + "_extra.npy", mode='r', dtype="<U90")
-		print(f'predicting m6A within {args.motif} motif start, {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 	except FileNotFoundError:
 		print("do not find specified motif in your data")
 		print("exit")
@@ -346,6 +345,8 @@ def main():
 	else:
 		os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	
+	print(f'predicting m6A within {args.motif} motif start, {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 	if args.kit == "002":
 		inference_002(test_dl,args.model,args.out_file,device)
 	if args.kit == "004":
