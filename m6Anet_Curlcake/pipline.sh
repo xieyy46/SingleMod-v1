@@ -1,5 +1,5 @@
 #!/bin/bash
-#version: m6Anet 2.0.2
+#version: m6Anet 2.0.2 (https://github.com/GoekeLab/m6anet)
 
 #used_raw_data: m6A_fast5 (rep1), UNM_rep1_fast5 (rep1) (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE124309)
 #ref.fa: reference (https://github.com/novoalab/EpiNano/tree/master/Reference_sequences/cc.fasta)
