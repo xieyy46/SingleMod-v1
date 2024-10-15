@@ -12,8 +12,8 @@ guppy_basecaller -i UNM_fast5 -s output/UNM -c rna_r9.4.1_70bps_hac.cfg --fast5_
 cat output/m6A/pass/*fastq > m6A.fastq
 cat output/UNM/pass/*fastq > UNM.fastq
 
-minimap2 -a ref.fa -t 25 --secondary=no m6A.fastq -o m6A.sam
-minimap2 -a ref.fa -t 25 --secondary=no UNM.fastq -o UNM.sam
+minimap2 -a ref.fa -t 24 --secondary=no m6A.fastq -o m6A.sam
+minimap2 -a ref.fa -t 24 --secondary=no UNM.fastq -o UNM.sam
 samtools view -@ 24 -F 2048 -F 4 -b m6A.sam | samtools sort -O BAM -@ 24 -o m6A.bam
 samtools view -@ 24 -F 2048 -F 4 -b UNM.sam | samtools sort -O BAM -@ 24 -o UNM.bam
 samtools index -@ 24 m6A.bam
@@ -25,10 +25,10 @@ nanopolish index --directory=UNM_fast5 --sequencing-summary=output/UNM/sequencin
 
 nanopolish eventalign \
 --reads m6A.fastq --bam m6A.bam --genome ref.fa \
---scale-events --signal-index -t 16 --summary=m6A_eventalign.summary > m6A_eventalign.txt
+--scale-events --signal-index -t 24 --summary=m6A_eventalign.summary > m6A_eventalign.txt
 nanopolish eventalign \
 --reads UNM.fastq --bam UNM.bam --genome ref.fa \
---scale-events --signal-index -t 16 --summary=UNM_eventalign.summary > UNM_eventalign.txt
+--scale-events --signal-index -t 24 --summary=UNM_eventalign.summary > UNM_eventalign.txt
 
 #m6Anet dataprep
 m6anet dataprep --eventalign m6A_evenalign.txt \
