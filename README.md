@@ -266,7 +266,7 @@ python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN
 * `-r`: experiment batch index, used to set seed when split data into train, validate and test set, default is 0.
 * `-g`: cuda index, default is using CPU
 * `-d`: bed file containing the absolute quantification information (methylation rates), its format is as follow:   
-(chromosvome location-1  location  *  methylation_rate  strand  kmer)   # Tab-separated
+(chromosvome location-1  location  *  methylation_rate  strand  kmer)   # Tab-separated  
 chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
 chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
 
