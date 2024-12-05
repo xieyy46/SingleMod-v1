@@ -267,8 +267,8 @@ python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN
 * `-g`: cuda index, default is using CPU
 * `-d`: bed file containing the absolute quantification information (methylation rates), its format is as follow:   
 (chromosvome location-1  location  *  methylation_rate  strand  kmer)   # Tab-separated  
-chr1    15878   15879   *  0.0290404       -       CGCCAAGCT   
-chr1    15939   15940   *  0.028949549999999998    -       AGGGAGCTC   
+chr1    15878   15879   .  0.0290404       -       CGCCAAGCT   
+chr1    15939   15940   .  0.028949549999999998    -       AGGGAGCTC   
 
 # Citing SingleMod
 Single-Molecule Direct RNA Sequencing Reveals the Shaping of Epitranscriptome Across Multiple Species, bioRxiv, 2023.11.16.567334; doi: https://doi.org/10.1101/2023.11.16.567334
