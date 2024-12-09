@@ -380,7 +380,7 @@ def train_002(train_dl,val_dl,test_dl,epochs,out_dir,device):
 	model = Model_002().to(device)
 	print("Construct model finish")
 	print("Number of parameters: ", count_parameters(model))
-	criterion = criterion = nn.MSELoss()
+	criterion = nn.MSELoss()
 	optimizer = adabound.AdaBound(model.parameters(), lr=1e-3, final_lr=0.1)
 	torch.set_num_threads(2)
 
@@ -481,7 +481,7 @@ def train_004(train_dl,val_dl,test_dl,epochs,out_dir,device):
 	model = Model_004().to(device)
 	print("Construct model finish")
 	print("Number of parameters: ", count_parameters(model))
-	criterion = criterion = nn.MSELoss()
+	criterion = nn.MSELoss()
 	optimizer = adabound.AdaBound(model.parameters(), lr=1e-3, final_lr=0.1)
 	torch.set_num_threads(2)
 
