@@ -270,6 +270,7 @@ python -u SingleMod/SingleMod_train.py -v 002|004 -s Sample1,Sample2,...,SampleN
 chr1    15878   15879   .  0.0290404       -       CGCCAAGCT   
 chr1    15939   15940   .  0.028949549999999998    -       AGGGAGCTC   
 
-# Citing SingleMod
+# Citing SingleMod 
+if you used script develop by us or found SingleMod helpful, please cite: 
 Single-Molecule Direct RNA Sequencing Reveals the Shaping of Epitranscriptome Across Multiple Species, bioRxiv, 2023.11.16.567334; doi: https://doi.org/10.1101/2023.11.16.567334
 # Data availability
