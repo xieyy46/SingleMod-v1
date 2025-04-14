@@ -271,6 +271,6 @@ chr1    15878   15879   .  0.0290404       -       CGCCAAGCT
 chr1    15939   15940   .  0.028949549999999998    -       AGGGAGCTC   
 
 # Citing SingleMod 
-if you used script develop by us or found SingleMod helpful, please cite: 
+if you used script developed by us or found SingleMod helpful, please cite:  
 Single-Molecule Direct RNA Sequencing Reveals the Shaping of Epitranscriptome Across Multiple Species, bioRxiv, 2023.11.16.567334; doi: https://doi.org/10.1101/2023.11.16.567334
 # Data availability
