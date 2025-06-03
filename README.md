@@ -1,4 +1,4 @@
-Our paper was published in nature communications on 3 jun, 2025  (https://www.nature.com/articles/s41467-025-60447-4)
+Our paper was published in nature communications on 3 jun, 2025  (https://www.nature.com/articles/s41467-025-60447-4)!
 
 
 # SingleMod
@@ -275,5 +275,5 @@ chr1    15939   15940   .  0.028949549999999998    -       AGGGAGCTC
 
 # Citing SingleMod 
 if you used script developed by us or found SingleMod helpful, please cite:  
-Single-Molecule Direct RNA Sequencing Reveals the Shaping of Epitranscriptome Across Multiple Species, bioRxiv, 2023.11.16.567334; doi: https://doi.org/10.1101/2023.11.16.567334
+Xie, YY., Zhong, ZD., Chen, HX. et al. Single-molecule direct RNA sequencing reveals the shaping of epitranscriptome across multiple species. Nat Commun 16, 5119 (2025). https://doi.org/10.1038/s41467-025-60447-4
 # Data availability
