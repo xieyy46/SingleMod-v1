@@ -1,3 +1,6 @@
+Our paper was published in nature communications on 3 jun, 2025  (https://www.nature.com/articles/s41467-025-60447-4)
+
+
 # SingleMod
 by Ying-Yuan Xie, Zhen-Dong Zhong, Hong-Xuan Chen  
 Correspondence to: zhangzhang@mail.sysu.edu.cn and luogzh5@mail.sysu.edu.cn  
