@@ -1,5 +1,5 @@
 ## **Our paper was published in nature communications on 2 jun, 2025  (https://www.nature.com/articles/s41467-025-60447-4)!**
-### Note: **SingleMod is designed to be run directly via command line using Python scripts.** It is not currently packaged as an installable tool (e.g., via pip or conda), allowing users to easily read, modify, and extend the code.
+### Note: **SingleMod is designed to be run directly via command line using Python scripts.**  It is not currently packaged as an installable tool (e.g., via pip or conda), allowing users to easily read, modify, and extend the code.
 
 # SingleMod
 by Ying-Yuan Xie, Zhen-Dong Zhong, Hong-Xuan Chen  
